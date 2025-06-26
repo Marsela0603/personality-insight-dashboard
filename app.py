@@ -21,9 +21,6 @@ menu = st.sidebar.radio("Go to:", [
     "🔎 Scatter Plot"
 ])
 
-# Sidebar footer – Created by
-st.sidebar.markdown("---")
-st.sidebar.markdown("**👥 Created by Group 9**  \nMarsela (0110223120)  \nRifa Fradita Safara (0110223118)  \nSri Lusiana (0110223129)")
 
 # Halaman Home
 if menu == "🏠 Home":
@@ -37,13 +34,13 @@ if menu == "🏠 Home":
     Discover how each personality type exhibits unique patterns through interactive visualizations.
     """)
     
-    # st.markdown("---")
-    # st.markdown("#### 👥 Created by Group 9 - Data Visualization Project")
-    # st.markdown("""
-    # - Marsela (0110223120)  
-    # - Rifa Fradita Safara (0110223118)  
-    # - Sri Lusiana (0110223129)
-    # """)
+    st.markdown("---")
+    st.markdown("#### 👥 Created by Group 9 - Data Visualization Project")
+    st.markdown("""
+    - Marsela (0110223120)  
+    - Rifa Fradita Safara (0110223118)  
+    - Sri Lusiana (0110223129)
+    """)
 
 # Halaman Tentang Dataset
 elif menu == "📎 About Dataset":

@@ -22,5 +22,5 @@ Dashboard interaktif berbasis Streamlit untuk menganalisis tipe kepribadian berd
 
 1. **Clone repositori**
 ```bash
-git clone https://github.com/NAMA-KAMU/personality-insight-dashboard.git
+git clone https://github.com/Marsela0603/personality-insight-dashboard.git
 cd personality-insight-dashboard
