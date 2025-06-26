@@ -4,12 +4,13 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import plotly.express as px
 
+# Konfigurasi halaman Streamlit
 st.set_page_config(page_title="Personality Insight Dashboard", page_icon="🧠", layout="wide")
 
-# Load dataset
+# Load dataset dari file CSV
 df = pd.read_csv("personality_synthetic_dataset.csv")
 
-# Sidebar navigation
+# Sidebar navigasi
 st.sidebar.title("Navigation")
 menu = st.sidebar.radio("Go to:", [
     "🏠 Home",
@@ -21,9 +22,9 @@ menu = st.sidebar.radio("Go to:", [
     "🔎 Scatter Plot"
 ])
 
-
 # Halaman Home
 if menu == "🏠 Home":
+    # Menampilkan judul dan deskripsi beranda
     st.title("🧠 Personality Insight Dashboard")
     st.markdown("""
     Welcome to the **Personality Insight Dashboard**!
@@ -34,6 +35,7 @@ if menu == "🏠 Home":
     Discover how each personality type exhibits unique patterns through interactive visualizations.
     """)
     
+    # Informasi kelompok pembuat
     st.markdown("---")
     st.markdown("#### 👥 Created by Group 9 - Data Visualization Project")
     st.markdown("""
@@ -44,12 +46,13 @@ if menu == "🏠 Home":
 
 # Halaman Tentang Dataset
 elif menu == "📎 About Dataset":
+    # Menampilkan penjelasan tentang isi dataset
     st.header("📎 About the Dataset")
     st.markdown("""
     This dataset contains **20,000 entries** and **30 columns**:
     
     - **Target Column**: `personality_type` (Introvert, Extrovert, Ambivert)
-    - **44 Feature Columns**: Various personality traits such as:
+    - **30 Feature Columns**: Various personality traits such as:
         - `social_energy`, `talkativeness`, `empathy`, `creativity`, `organization`, etc.
     
     The dataset is ideal for:
@@ -59,22 +62,25 @@ elif menu == "📎 About Dataset":
     - Feature importance studies
     """)
 
-
 # Halaman Distribusi Kepribadian
 elif menu == "📊 Personality Distribution":
+    # Menampilkan pie chart untuk distribusi tipe kepribadian
     st.header("📊 Personality Type Distribution")
     fig = px.pie(df, names='personality_type', title='Distribution of Personality Types')
     st.plotly_chart(fig)
 
 # Halaman Perbandingan Trait
 elif menu == "📈 Trait Comparison":
+    # Menampilkan bar chart rata-rata trait berdasarkan tipe kepribadian
     st.header("📈 Average Trait by Personality Type")
     selected_trait = st.selectbox("Select a Trait:", df.columns[1:-1])
     avg_df = df.groupby("personality_type")[selected_trait].mean().reset_index()
     fig = px.bar(avg_df, x='personality_type', y=selected_trait, color='personality_type', title=f"Average {selected_trait} by Personality Type")
     st.plotly_chart(fig)
 
+# Halaman Boxplot Trait
 elif menu == "📉 Trait Boxplot":
+    # Menampilkan boxplot distribusi trait untuk masing-masing tipe kepribadian
     st.header("📉 Trait Distribution by Personality Type (Boxplot)")
     selected_trait = st.selectbox("Select a Trait to Explore:", df.columns[1:-1], key="boxplot_trait")
     
@@ -83,9 +89,9 @@ elif menu == "📉 Trait Boxplot":
     plt.title(f'{selected_trait} Distribution by Personality Type')
     st.pyplot(fig)
 
-
 # Halaman Korelasi
 elif menu == "🔍 Correlation Analysis":
+    # Menampilkan heatmap korelasi antar trait numerik
     st.header("🔍 Correlation Heatmap")
     numeric_df = df.drop("personality_type", axis=1)
     corr = numeric_df.corr()
@@ -93,8 +99,9 @@ elif menu == "🔍 Correlation Analysis":
     sns.heatmap(corr, cmap='coolwarm', annot=False)
     st.pyplot(fig)
 
-
+# Halaman Scatter Plot
 elif menu == "🔎 Scatter Plot":
+    # Menampilkan scatter plot dua trait berdasarkan tipe kepribadian
     st.header("🔎 Scatter Plot of Two Traits")
     st.markdown("Select two traits below to see their relationship and how they are spread across personality types.")
 
@@ -114,5 +121,3 @@ elif menu == "🔎 Scatter Plot":
         symbol="personality_type"
     )
     st.plotly_chart(fig)
-
-
